@@ -1,11 +1,11 @@
 import React from 'react'
-import Notes from './Notes'
+import Tasks from './Tasks'
 
 const Home = (props) => {
 
     return (
         <div>
-            <Notes showAlert={props.showAlert} mode={props.mode} setName={props.setName} />
+            <Tasks showAlert={props.showAlert} mode={props.mode} setName={props.setName} />
         </div>
     )
 }

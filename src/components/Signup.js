@@ -15,7 +15,7 @@ const Signup = (props) => {
         setLoading(true);
         e.preventDefault();
         const { name, email, password } = credentials;
-        const response = await fetch("https://inotebook-backend-gaurav-1.onrender.com/api/auth/createuser", {
+        const response = await fetch("https://todolist-backend-znhc.onrender.com/api/auth/createuser", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

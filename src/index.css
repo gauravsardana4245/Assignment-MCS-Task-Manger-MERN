@@ -17,7 +17,3 @@ i {
 .inputValidate {
   color: red;
 }
-.alert {
-  position: sticky;
-  top: 0;
-}

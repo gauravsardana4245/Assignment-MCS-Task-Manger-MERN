@@ -2,7 +2,7 @@ import { useState } from "react"
 import TaskContext from "./TaskContext"
 
 const TaskState = (props) => {
-    const host = "https://itaskbook-backend-gaurav-1.onrender.com"
+    const host = "https://todolist-backend-znhc.onrender.com"
 
     const tasksInitial = []
     const [tasks, setTasks] = useState(tasksInitial)

@@ -1,25 +1,25 @@
 import React, { useContext } from 'react'
 import { useState } from 'react';
-import notesContext from "../context/notes/NoteContext"
+import tasksContext from "../context/tasks/TaskContext"
 
-const AddNote = (props) => {
-    const context = useContext(notesContext);
+const AddTask = (props) => {
+    const context = useContext(tasksContext);
     const { mode } = props;
-    const { addNote } = context;
+    const { addTask } = context;
 
-    const [note, setNote] = useState({ title: "", description: "", tag: "" })
+    const [task, setTask] = useState({ title: "", description: "", tag: "" })
 
     const changeHandler = (e) => {
 
-        setNote({ ...note, [e.target.name]: e.target.value })
+        setTask({ ...task, [e.target.name]: e.target.value })
 
     }
 
     const submitHandler = (e) => {
         e.preventDefault();
-        addNote(note.title, note.description, note.tag);
+        addTask(task.title, task.description, task.tag);
 
-        setNote({ title: "", description: "", tag: "" });
+        setTask({ title: "", description: "", tag: "" });
 
     }
     return (
@@ -32,10 +32,10 @@ const AddNote = (props) => {
                         <input type="text" style={{
                             backgroundColor: `${mode === 'dark' ? "#212529" : 'white'}`,
                             color: `${mode === 'light' ? "black" : 'white'}`
-                        }} className="form-control" id="title" value={note.title} aria-describedby="emailHelp" name="title" onChange={changeHandler} />
+                        }} className="form-control" id="title" value={task.title} aria-describedby="emailHelp" name="title" onChange={changeHandler} />
 
                     </div>
-                    {note.title.length > 0 && note.title.length < 3 &&
+                    {task.title.length > 0 && task.title.length < 3 &&
                         <div className='inputValidate'>
                             <span>(Title should be atleast 3 characters long)</span>
                         </div>
@@ -45,9 +45,9 @@ const AddNote = (props) => {
                         <input type="text" style={{
                             backgroundColor: `${mode === 'dark' ? "#212529" : 'white'}`,
                             color: `${mode === 'light' ? "black" : 'white'}`
-                        }} className="form-control" id="description" value={note.description} name="description" onChange={changeHandler} />
+                        }} className="form-control" id="description" value={task.description} name="description" onChange={changeHandler} />
                     </div>
-                    {note.description.length > 0 && note.description.length < 5 &&
+                    {task.description.length > 0 && task.description.length < 5 &&
                         <div className='inputValidate'>
                             <span>(description should be atleast 5 characters long)</span>
                         </div>
@@ -57,10 +57,10 @@ const AddNote = (props) => {
                         <input type="text" style={{
                             backgroundColor: `${mode === 'dark' ? "#212529" : 'white'}`,
                             color: `${mode === 'light' ? "black" : 'white'}`
-                        }} className="form-control" id="tag" name="tag" value={note.tag} onChange={changeHandler} />
+                        }} className="form-control" id="tag" name="tag" value={task.tag} onChange={changeHandler} />
                     </div>
 
-                    <button disabled={note.description.length < 5 || note.title.length < 3} type="submit" className="btn btn-primary" onClick={submitHandler}>Add Todo</button>
+                    <button disabled={task.description.length < 5 || task.title.length < 3} type="submit" className="btn btn-primary" onClick={submitHandler}>Add Todo</button>
                 </form>
             </div>
 
@@ -68,4 +68,4 @@ const AddNote = (props) => {
     )
 }
 
-export default AddNote
+export default AddTask
