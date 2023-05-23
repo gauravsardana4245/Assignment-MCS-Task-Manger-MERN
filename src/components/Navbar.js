@@ -18,7 +18,7 @@ const Navbar = (props) => {
     }
     return (
         <div>
-            <nav className={`navbar navbar-expand-lg bg-${props.mode === 'light' ? 'light' : 'dark'} `}>
+            <nav className={`px-2 navbar navbar-expand-lg bg-${props.mode === 'light' ? 'light' : 'dark'} `}>
                 <div className={`container-fluid`}>
                     {/* <img className='mr-2' style={logoStyle} src={logo} alt="" /> */}
                     <Link className={`navbar-brand text-${props.mode === 'light' ? 'dark' : 'light'} `} to="/">iNotebook</Link>

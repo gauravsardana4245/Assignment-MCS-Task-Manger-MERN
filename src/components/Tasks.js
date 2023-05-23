@@ -59,7 +59,7 @@ const Notes = (props) => {
     }
     return (
         <>
-            <AddNote />
+            <AddNote mode={mode} />
             <button type="button" ref={ref} className="btn btn-primary d-none" data-toggle="modal" data-target="#exampleModal">
                 Launch demo modal
             </button>
@@ -67,27 +67,36 @@ const Notes = (props) => {
 
             <div className="modal fade" id="exampleModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog" role="document">
-                    <div className="modal-content">
+                    <div className={`modal-content bg-${mode === 'light' ? 'light' : 'dark'}`}>
                         <div className="modal-header">
-                            <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <h5 className="modal-title" id="exampleModalLabel">Edit Todo</h5>
                             <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
+                                <span style={{ color: `${mode === 'light' ? "black" : 'white'}` }} aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div className="modal-body">
                             <form className='my-3'>
                                 <div className="mb-3">
                                     <label htmlFor="etitle" className="form-label">Title</label>
-                                    <input type="text" className="form-control" id="etitle" aria-describedby="emailHelp" name="etitle" onChange={changeHandler} value={note.etitle} />
+                                    <input type="text" style={{
+                                        backgroundColor: `${mode === 'dark' ? "#212529" : 'white'}`,
+                                        color: `${mode === 'light' ? "black" : 'white'}`
+                                    }} className="form-control" id="etitle" aria-describedby="emailHelp" name="etitle" onChange={changeHandler} value={note.etitle} />
 
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="edescription" className="form-label">Description</label>
-                                    <input type="text" value={note.edescription} className="form-control" id="edescription" name="edescription" onChange={changeHandler} />
+                                    <input type="text" style={{
+                                        backgroundColor: `${mode === 'dark' ? "#212529" : 'white'}`,
+                                        color: `${mode === 'light' ? "black" : 'white'}`
+                                    }} value={note.edescription} className="form-control" id="edescription" name="edescription" onChange={changeHandler} />
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="etag" className="form-label">Tag</label>
-                                    <input type="text" value={note.etag} className="form-control" id="etag" name="etag" onChange={changeHandler} />
+                                    <input type="text" style={{
+                                        backgroundColor: `${mode === 'dark' ? "#212529" : 'white'}`,
+                                        color: `${mode === 'light' ? "black" : 'white'}`
+                                    }} value={note.etag} className="form-control" id="etag" name="etag" onChange={changeHandler} />
                                 </div>
 
                             </form>
@@ -100,13 +109,14 @@ const Notes = (props) => {
                     </div>
                 </div>
             </div>
-            <div className='row my-5 mx-3 container'>
-                <h2>Your notes</h2>
+            <div className='row my-5 mx-5 container tasks-container'>
+                <h2>Your tasks</h2>
                 {notes.length === 0 && <div className='container'> No notes to display</div>}
                 {notes.map((currentnote) => {
                     return <NoteItem key={Math.random()} updateNote={updateNote} note={currentnote} showAlert={showAlert} mode={mode} />
 
                 })}
+
             </div>
         </>
     )
