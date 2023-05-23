@@ -7,7 +7,7 @@ var jwt = require('jsonwebtoken');
 const fetchuser = require("../middlewares/fetchuser")
 
 let success = false;
-const JWT_SECRET = "harrysisagoodb$oy"
+const JWT_SECRET = "gaurav$ardana"
 
 // Creating a route to sign up
 router.post("/createuser", [

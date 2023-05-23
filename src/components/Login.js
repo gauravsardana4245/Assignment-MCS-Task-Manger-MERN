@@ -38,7 +38,7 @@ const Login = (props) => {
     }
     return (
         <div className='container'>
-            <h2 className='my-2'>Login to continue to iNotebook</h2>
+            <h2 className='my-2'>Login to continue to MyTasks</h2>
             <form onSubmit={onSubmit}>
 
                 <div className="mb-3">

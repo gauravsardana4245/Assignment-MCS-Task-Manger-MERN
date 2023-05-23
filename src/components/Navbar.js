@@ -1,11 +1,6 @@
 import React, { useEffect } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 
-// const logoStyle = {
-//     fontSize: "24px",
-//     height: "50px",
-//     width: "50px"
-// }
 const Navbar = (props) => {
     let location = useLocation();
     useEffect(() => {
@@ -21,7 +16,7 @@ const Navbar = (props) => {
             <nav className={`px-2 navbar navbar-expand-lg bg-${props.mode === 'light' ? 'light' : 'dark'} `}>
                 <div className={`container-fluid`}>
                     {/* <img className='mr-2' style={logoStyle} src={logo} alt="" /> */}
-                    <Link className={`navbar-brand text-${props.mode === 'light' ? 'dark' : 'light'} `} to="/">iNotebook</Link>
+                    <Link className={`navbar-brand text-${props.mode === 'light' ? 'dark' : 'light'} `} to="/">MyTasks</Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>

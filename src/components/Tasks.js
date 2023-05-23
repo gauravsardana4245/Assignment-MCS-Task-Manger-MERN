@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
-import tasksContext from "../context/tasks/TaskContext"
+import TasksContext from "../context/tasks/TaskContext"
 import AddTask from './AddTask';
 import TaskItem from './TaskItem';
 import { useNavigate } from "react-router-dom"
 
 const Tasks = (props) => {
-    const context = useContext(tasksContext)
+    const context = useContext(TasksContext)
     const { tasks, getTasks, editTask } = context;
     const { showAlert, mode, setName } = props;
     let navigate = useNavigate();
@@ -26,6 +26,7 @@ const Tasks = (props) => {
                 setName(json.name);
             }
             fetchdata();
+            setName(props.name);
         }
         else {
             navigate("/login");
@@ -33,7 +34,7 @@ const Tasks = (props) => {
 
 
 
-    }, [getTasks, navigate, setName])
+    }, [])
 
     const [task, setTask] = useState({ id: "", etitle: "", edescription: "", etag: "" })
 

@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
-import tasksContext from "../context/tasks/TaskContext"
+import TasksContext from "../context/tasks/TaskContext"
 
 const TaskItem = (props) => {
     const { task, updateTask, mode } = props;
 
-    const context = useContext(tasksContext);
+    const context = useContext(TasksContext);
     const { deleteTask } = context;
 
     return (

@@ -1,6 +1,5 @@
 {
-  "homepage": "https://gauravsardana4245.github.io/inotebook",
-  "name": "inotebook",
+  "name": "todolist",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
