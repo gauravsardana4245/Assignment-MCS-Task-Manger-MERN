@@ -32,12 +32,8 @@ const TaskState = (props) => {
             body: JSON.stringify({ title: title, description: description, tag: tag })
         });
         const json = await response.json();
-        const task = json;
-        // const newTask = {
-        //     title: task.title,
-        //     description: task.description,
-        //     tag: task.tag
-        // }
+        const task = json.task;
+        console.log(task)
 
         setTasks(tasks.concat(task));
     }

@@ -17,3 +17,14 @@ i {
 .inputValidate {
   color: red;
 }
+.mandatory-mark {
+  color: rgb(198, 0, 0);
+}
+.mandatory-mark {
+  &-dark {
+    color: white;
+  }
+  &-light {
+    color: black;
+  }
+}

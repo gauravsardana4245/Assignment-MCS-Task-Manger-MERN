@@ -31,9 +31,6 @@ const Tasks = (props) => {
         else {
             navigate("/login");
         }
-
-
-
     }, [])
 
     const [task, setTask] = useState({ id: "", etitle: "", edescription: "", etag: "" })

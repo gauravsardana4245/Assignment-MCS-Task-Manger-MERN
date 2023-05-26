@@ -28,8 +28,8 @@ const AddTask = (props) => {
                 <h2>Add a Todo</h2>
                 <form className='my-3'>
                     <div className="mb-3">
-                        <label htmlFor="title" className="form-label">Title</label>
-                        <input type="text" style={{
+                        <label htmlFor="title" className="form-label">Title <span className={`mandatory-mark-${mode}`}>*</span></label>
+                        <input required type="text" style={{
                             backgroundColor: `${mode === 'dark' ? "#212529" : 'white'}`,
                             color: `${mode === 'light' ? "black" : 'white'}`
                         }} className="form-control" id="title" value={task.title} aria-describedby="emailHelp" name="title" onChange={changeHandler} />
@@ -41,13 +41,14 @@ const AddTask = (props) => {
                         </div>
                     }
                     <div className="mb-3">
-                        <label htmlFor="description" className="form-label">Description</label>
-                        <input type="text" style={{
+                        <label htmlFor="description" className="form-label">Description <span className={`mandatory-mark-${mode}`}>*</span></label>
+                        <input required type="text" style={{
                             backgroundColor: `${mode === 'dark' ? "#212529" : 'white'}`,
                             color: `${mode === 'light' ? "black" : 'white'}`
                         }} className="form-control" id="description" value={task.description} name="description" onChange={changeHandler} />
                     </div>
-                    {task.description.length > 0 && task.description.length < 5 &&
+                    {
+                        task.description.length > 0 && task.description.length < 5 &&
                         <div className='inputValidate'>
                             <span>(description should be atleast 5 characters long)</span>
                         </div>
@@ -61,10 +62,10 @@ const AddTask = (props) => {
                     </div>
 
                     <button disabled={task.description.length < 5 || task.title.length < 3} type="submit" className="btn btn-primary" onClick={submitHandler}>Add Todo</button>
-                </form>
-            </div>
+                </form >
+            </div >
 
-        </div>
+        </div >
     )
 }
 

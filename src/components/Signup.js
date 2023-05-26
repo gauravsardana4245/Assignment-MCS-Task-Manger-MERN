@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Spinner from './Spinner';
 
 const Signup = (props) => {
+    const { mode } = props;
     const [credentials, setCredentials] = useState({ name: "", email: "", password: "", cpassword: "" });
     const [loading, setLoading] = useState(false);
     const onChange = async (e) => {
@@ -42,25 +43,40 @@ const Signup = (props) => {
             <h2 className='my-2 mb-4'>Create an account to start using MyTasks</h2>
             <form onSubmit={onSubmit}>
                 <div className="mb-3">
-                    <label htmlFor="name" className="form-label">Name</label>
-                    <input type="text" className="form-control" id="name" aria-describedby="emailHelp" name='name' onChange={onChange} />
+                    <label htmlFor="name" className="form-label">Name <span className={`mandatory-mark-${mode}`}>*</span></label>
+                    <input required style={{
+                        backgroundColor: `${mode === 'dark' ? "#212529" : 'white'}`,
+                        color: `${mode === 'light' ? "black" : 'white'}`
+                    }} type="text" className="form-control" id="name" aria-describedby="emailHelp" name='name' onChange={onChange} />
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="email" className="form-label">Email address</label>
-                    <input type="email" className="form-control" id="email" aria-describedby="emailHelp" name='email' onChange={onChange} />
+                    <label htmlFor="email" className="form-label">Email address <span className={`mandatory-mark-${mode}`}>*</span></label>
+                    <input required style={{
+                        backgroundColor: `${mode === 'dark' ? "#212529" : 'white'}`,
+                        color: `${mode === 'light' ? "black" : 'white'}`
+                    }} type="email" className="form-control" id="email" aria-describedby="emailHelp" name='email' onChange={onChange} />
 
                 </div>
                 <div className="mb-3">
                     <label htmlFor="dob" className="form-label">Date of birth</label>
-                    <input type="date" className="form-control" id="dob" name='dob' onChange={onChange} />
+                    <input style={{
+                        backgroundColor: `${mode === 'dark' ? "#212529" : 'white'}`,
+                        color: `${mode === 'light' ? "black" : 'white'}`
+                    }} type="date" className="form-control" id="dob" name='dob' onChange={onChange} />
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="password" className="form-label">Password</label>
-                    <input type="password" className="form-control" id="password" name='password' onChange={onChange} required minLength={5} />
+                    <label htmlFor="password" className="form-label">Password <span className={`mandatory-mark-${mode}`}>*</span></label>
+                    <input required style={{
+                        backgroundColor: `${mode === 'dark' ? "#212529" : 'white'}`,
+                        color: `${mode === 'light' ? "black" : 'white'}`
+                    }} type="password" className="form-control" id="password" name='password' onChange={onChange} minLength={5} />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="cpassword" className="form-label">Confrrm Password</label>
-                    <input type="password" className="form-control" id="cpassword" name='cpassword' onChange={onChange} minLength={5} />
+                    <input style={{
+                        backgroundColor: `${mode === 'dark' ? "#212529" : 'white'}`,
+                        color: `${mode === 'light' ? "black" : 'white'}`
+                    }} type="password" className="form-control" id="cpassword" name='cpassword' onChange={onChange} minLength={5} />
                 </div>
                 <button type="submit" className="btn btn-primary my-2" >Sign up</button>
                 {loading && <Spinner />}

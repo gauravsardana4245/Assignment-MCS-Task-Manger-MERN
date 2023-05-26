@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import Spinner from './Spinner';
 
 const Login = (props) => {
+    const { mode } = props;
     const [credentials, setCredentials] = useState({ email: "", password: "" });
     const [loading, setLoading] = useState(false);
     const onChange = async (e) => {
@@ -42,13 +43,19 @@ const Login = (props) => {
             <form onSubmit={onSubmit}>
 
                 <div className="mb-3">
-                    <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
-                    <input type="email" className="form-control" id="email" aria-describedby="emailHelp" name='email' onChange={onChange} />
+                    <label htmlFor="exampleInputEmail1" className="form-label">Email address </label>
+                    <input style={{
+                        backgroundColor: `${mode === 'dark' ? "#212529" : 'white'}`,
+                        color: `${mode === 'light' ? "black" : 'white'}`
+                    }} required type="email" className="form-control" id="email" aria-describedby="emailHelp" name='email' onChange={onChange} />
 
                 </div>
                 <div className="mb-3">
                     <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
-                    <input type="password" className="form-control" id="password" name='password' onChange={onChange} />
+                    <input required style={{
+                        backgroundColor: `${mode === 'dark' ? "#212529" : 'white'}`,
+                        color: `${mode === 'light' ? "black" : 'white'}`
+                    }} type="password" className="form-control" id="password" name='password' onChange={onChange} />
                 </div>
                 <button type="submit" className="btn btn-primary" >Login</button>
                 {loading && <Spinner />}
