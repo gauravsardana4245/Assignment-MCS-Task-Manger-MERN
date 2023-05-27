@@ -56,7 +56,7 @@ const Tasks = (props) => {
 
     }
     return (
-        <>
+        <div className='container'>
             <AddTask mode={mode} />
             <button type="button" ref={ref} className="btn btn-primary d-none" data-toggle="modal" data-target="#exampleModal">
                 Launch demo modal
@@ -116,7 +116,7 @@ const Tasks = (props) => {
                     </div>
                 </div>
             </div>
-            <div className='row my-5 mx-5 container tasks-container'>
+            <div className='row my-5  container tasks-container'>
                 <h2>Your Tasks</h2>
                 {tasks.length === 0 && <div className='container'> No tasks to display</div>}
                 {tasks.map((currenttask) => {
@@ -125,7 +125,7 @@ const Tasks = (props) => {
                 })}
 
             </div>
-        </>
+        </div>
     )
 }
 

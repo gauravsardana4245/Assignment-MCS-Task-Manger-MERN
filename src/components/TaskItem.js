@@ -8,7 +8,7 @@ const TaskItem = (props) => {
     const { deleteTask } = context;
 
     return (
-        <div className={`col-md-3 my-3`}>
+        <div className={`col-md-3 `}>
             <div className={`card my-3 bg-${mode === 'light' ? 'light' : 'dark'}`} >
                 <div className="card-body">
                     <h5 className={`card-title `}>{task.title}</h5>
