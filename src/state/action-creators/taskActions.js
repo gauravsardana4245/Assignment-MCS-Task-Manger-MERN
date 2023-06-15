@@ -1,4 +1,4 @@
-const host = "http://localhost:5000";
+const host = "https://task-manager-gaurav-backend.onrender.com";
 export const getTasks = () => {
     return async (dispatch) => {
         try {

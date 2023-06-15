@@ -23,7 +23,7 @@ const Tasks = (props) => {
         if (localStorage.getItem("token")) {
             getTasks();
             async function fetchdata() {
-                const response = await fetch("https://todolist-backend-znhc.onrender.com/api/auth/getuser", {
+                const response = await fetch("https://task-manager-gaurav-backend.onrender.com/api/auth/getuser", {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -86,7 +86,7 @@ const Tasks = (props) => {
                             <form className='my-3'>
                                 <div className="mb-3">
                                     <label htmlFor="etitle" className="form-label">Title</label>
-                                    <input type="text" style={{
+                                    <input required type="text" style={{
                                         backgroundColor: `${mode === 'dark' ? "#212529" : 'white'}`,
                                         color: `${mode === 'light' ? "black" : 'white'}`
                                     }} className="form-control" id="etitle" aria-describedby="emailHelp" name="etitle" onChange={changeHandler} value={task.etitle} />
@@ -98,7 +98,7 @@ const Tasks = (props) => {
                                 }
                                 <div className="mb-3">
                                     <label htmlFor="edescription" className="form-label">Description</label>
-                                    <input type="text" style={{
+                                    <input required type="text" style={{
                                         backgroundColor: `${mode === 'dark' ? "#212529" : 'white'}`,
                                         color: `${mode === 'light' ? "black" : 'white'}`
                                     }} value={task.edescription} className="form-control" id="edescription" name="edescription" onChange={changeHandler} />
