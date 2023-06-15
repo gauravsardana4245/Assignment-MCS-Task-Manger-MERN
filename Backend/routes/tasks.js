@@ -29,6 +29,7 @@ router.post("/addtask", fetchuser, [
             title: req.body.title,
             description: req.body.description,
             tag: req.body.tag,
+            deadline: req.body.deadline !== '' ? new Date(req.body.deadline) : null,
             user: req.user.id
         })
 
@@ -43,7 +44,7 @@ router.post("/addtask", fetchuser, [
 
 // Update an existing task
 router.put("/updatetask/:id", fetchuser, async (req, res) => {
-    let { title, description, tag } = req.body;
+    let { title, description, tag, deadline } = req.body;
     try {
 
         // Create a new task object
@@ -51,6 +52,7 @@ router.put("/updatetask/:id", fetchuser, async (req, res) => {
         if (title) { newTask.title = title }
         if (description) { newTask.description = description }
         if (tag) { newTask.tag = tag }
+        if (deadline !== "") { newTask.deadline = deadline }
 
         // Find the task to be updated and update it
         let task = await Task.findById(req.params.id);
@@ -63,6 +65,31 @@ router.put("/updatetask/:id", fetchuser, async (req, res) => {
 
         task = await Task.findByIdAndUpdate(req.params.id, { $set: newTask }, { new: true })
         res.json({ task })
+    }
+    catch (error) {
+        console.error(error.message);
+        res.status(500).send("Internal server error occured");
+    }
+})
+
+//Toggle Completed
+router.patch("/togglecomplete/:id", fetchuser, async (req, res) => {
+    let { isCompleted } = req.body;
+    try {
+
+        // Find the task to be updated and update it
+        let task = await Task.findById(req.params.id);
+        if (!task) {
+            return res.status(400).send("Task not found");
+        }
+        if (task.user.toString() !== req.user.id) {
+            return res.status(400).send("Not allowed: User not authenticated");
+        }
+
+        task.isCompleted = isCompleted;
+        await task.save();
+
+        res.json({ task });
     }
     catch (error) {
         console.error(error.message);

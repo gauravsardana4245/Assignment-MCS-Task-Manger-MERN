@@ -28,3 +28,10 @@ i {
     color: black;
   }
 }
+.tasks-page {
+  width: 100%;
+  max-width: 480px;
+  height: 88vh;
+  margin: 0 auto;
+  position: relative;
+}

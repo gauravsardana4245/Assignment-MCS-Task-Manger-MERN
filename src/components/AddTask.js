@@ -1,31 +1,35 @@
-import React, { useContext } from 'react'
+import { useDispatch } from 'react-redux';
 import { useState } from 'react';
-import tasksContext from "../context/tasks/TaskContext"
+import { bindActionCreators } from 'redux';
+import { actionCreators } from '../state/index';
+
 
 const AddTask = (props) => {
-    const context = useContext(tasksContext);
+    const dispatch = useDispatch();
+    const { addTask } = bindActionCreators(actionCreators, dispatch)
     const { mode } = props;
-    const { addTask } = context;
 
-    const [task, setTask] = useState({ title: "", description: "", tag: "" })
+    const [task, setTask] = useState({ title: "", description: "", tag: "", deadline: "" })
 
     const changeHandler = (e) => {
 
-        setTask({ ...task, [e.target.name]: e.target.value })
+        setTask({ ...task, [e.target.name]: e.target.value });
+
 
     }
 
     const submitHandler = (e) => {
         e.preventDefault();
-        addTask(task.title, task.description, task.tag);
+        console.log(task)
+        addTask(task.title, task.description, task.tag, task.deadline); // Pass the formatted deadline
+        setTask({ title: "", description: "", tag: "", deadline: "" });
 
-        setTask({ title: "", description: "", tag: "" });
 
     }
     return (
         <div>
-            <div className="container my-3">
-                <h2>Add a Todo</h2>
+            <div className="container rounded-4 my-3 border border-dark p-12">
+                <h2 className='text-center'>Add a Task</h2>
                 <form className='my-3'>
                     <div className="mb-3">
                         <label htmlFor="title" className="form-label">Title <span className={`mandatory-mark-${mode}`}>*</span></label>
@@ -60,8 +64,15 @@ const AddTask = (props) => {
                             color: `${mode === 'light' ? "black" : 'white'}`
                         }} className="form-control" id="tag" name="tag" value={task.tag} onChange={changeHandler} />
                     </div>
+                    <div className="mb-3">
+                        <label htmlFor="deadline" className="form-label">Deadline</label>
+                        <input onBlur={changeHandler} type="date" style={{
+                            backgroundColor: `${mode === 'dark' ? "#212529" : 'white'}`,
+                            color: `${mode === 'light' ? "black" : 'white'}`
+                        }} className="form-control" id="deadline" name="deadline" value={task.deadline} onChange={changeHandler} />
+                    </div>
 
-                    <button disabled={task.description.length < 5 || task.title.length < 3} type="submit" className="btn btn-primary" onClick={submitHandler}>Add Todo</button>
+                    <button disabled={task.description.length < 5 || task.title.length < 3} type="submit" className="btn btn-primary" onClick={submitHandler}>Add Task</button>
                 </form >
             </div >
 

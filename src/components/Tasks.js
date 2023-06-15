@@ -1,14 +1,24 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
-import TasksContext from "../context/tasks/TaskContext"
+import React, { useEffect, useRef, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import AddTask from './AddTask';
 import TaskItem from './TaskItem';
 import { useNavigate } from "react-router-dom"
+import { bindActionCreators } from 'redux';
+import { actionCreators } from '../state/index';
 
 const Tasks = (props) => {
-    const context = useContext(TasksContext)
-    const { tasks, getTasks, editTask } = context;
+    const dispatch = useDispatch();
+    const { getTasks, editTask } = bindActionCreators(actionCreators, dispatch)
     const { showAlert, mode, setName } = props;
     let navigate = useNavigate();
+    const [tasks, setTasks] = useState([]);
+    const tasks_from_redux = useSelector(state => state.task.tasks)
+
+    useEffect(() => {
+        if (tasks_from_redux.length > 0) {
+            setTasks(tasks_from_redux);
+        }
+    }, [tasks_from_redux])
     useEffect(() => {
         if (localStorage.getItem("token")) {
             getTasks();
@@ -33,7 +43,7 @@ const Tasks = (props) => {
         }
     }, [])
 
-    const [task, setTask] = useState({ id: "", etitle: "", edescription: "", etag: "" })
+    const [task, setTask] = useState({ id: "", etitle: "", edescription: "", etag: "", edeadline: "" })
 
     const ref = useRef(null);
     const ref2 = useRef(null);
@@ -49,14 +59,14 @@ const Tasks = (props) => {
 
     const submitHandler = (e) => {
         console.log("Updating the task...", task)
-        editTask(task.etitle, task.edescription, task.etag, task.id)
+        editTask(task.etitle, task.edescription, task.etag, task.edeadline, task.id)
         // e.preventDefault();
         showAlert(" Task Updated Succesfully", "success");
         ref2.current.click();
 
     }
     return (
-        <div className='container'>
+        <div className='container tasks-page'>
             <AddTask mode={mode} />
             <button type="button" ref={ref} className="btn btn-primary d-none" data-toggle="modal" data-target="#exampleModal">
                 Launch demo modal
@@ -105,7 +115,13 @@ const Tasks = (props) => {
                                         color: `${mode === 'light' ? "black" : 'white'}`
                                     }} value={task.etag} className="form-control" id="etag" name="etag" onChange={changeHandler} />
                                 </div>
-
+                                <div className="mb-3">
+                                    <label htmlFor="edeadline" className="form-label">Deadline</label>
+                                    <input onBlur={changeHandler} type="date" style={{
+                                        backgroundColor: `${mode === 'dark' ? "#212529" : 'white'}`,
+                                        color: `${mode === 'light' ? "black" : 'white'}`
+                                    }} className="form-control" id="edeadline" name="edeadline" value={task.edeadline} onChange={changeHandler} />
+                                </div>
                             </form>
                         </div>
                         <div className="modal-footer">
@@ -116,13 +132,15 @@ const Tasks = (props) => {
                     </div>
                 </div>
             </div>
-            <div className='row my-5  container tasks-container'>
-                <h2>Your Tasks</h2>
-                {tasks.length === 0 && <div className='container'> No tasks to display</div>}
-                {tasks.map((currenttask) => {
-                    return <TaskItem key={Math.random()} updateTask={updateTask} task={currenttask} showAlert={showAlert} mode={mode} />
+            <div className='my-5  container tasks-container'>
+                <h2 className='text-center'>Your Tasks</h2>
+                {tasks.length === 0 ? <div className='container'> No tasks to display</div>
+                    :
+                    tasks.map((currenttask) => {
+                        return <TaskItem key={Math.random()} updateTask={updateTask} task={currenttask} showAlert={showAlert} mode={mode} />
 
-                })}
+                    })
+                }
 
             </div>
         </div>

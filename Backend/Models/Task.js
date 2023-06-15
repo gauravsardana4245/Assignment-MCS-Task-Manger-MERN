@@ -21,6 +21,14 @@ const TasksSchema = new Schema({
         default: "general"
 
     },
+    isCompleted: {
+        type: Boolean,
+        default: false
+    },
+    deadline: {
+        type: Date,
+        default: null
+    },
     date: {
         type: Date,
         default: Date.now

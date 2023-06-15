@@ -6,11 +6,12 @@ import {
 import Navbar from './components/Navbar';
 import About from './components/About';
 import Home from './components/Home';
-import TaskState from './context/tasks/TaskState';
 import Alert from './components/Alert';
 import Login from './components/Login';
+import store from './state/store';
 import Signup from './components/Signup';
 import { useState } from 'react';
+import { Provider } from "react-redux";
 
 function App() {
   const [alert, setAlert] = useState(null);
@@ -47,7 +48,7 @@ function App() {
 
   return (
     <div className="App">
-      <TaskState>
+      <Provider store={store}>
         <HashRouter>
           <Navbar name={name} toggleMode={toggleMode} mode={mode} />
           <Alert alert={alert} />
@@ -60,7 +61,7 @@ function App() {
 
           </Routes>
         </HashRouter>
-      </TaskState>
+      </Provider>
     </div>
   );
 }
