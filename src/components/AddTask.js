@@ -72,7 +72,9 @@ const AddTask = (props) => {
                         }} className="form-control" id="deadline" name="deadline" value={task.deadline} onChange={changeHandler} />
                     </div>
 
-                    <button disabled={task.description.length < 5 || task.title.length < 3} type="submit" className="btn btn-primary" onClick={submitHandler}>Add Task</button>
+                    <div className='d-flex justify-content-center'>
+                        <button disabled={task.description.length < 5 || task.title.length < 3} type="submit" className="btn btn-dark" onClick={submitHandler}>Add Task</button>
+                    </div>
                 </form >
             </div >
 

@@ -7,7 +7,8 @@ const Spinner = () => {
     <div style={{
       display: "flex",
       alignItems: "center",
-      justifyContent: "center"
+      justifyContent: "center",
+      margin: "10px"
     }}>
       <img style={{ textAlign: "center", margin: "3px 0" }} src={loading} alt="loading" />
     </div>

@@ -39,9 +39,9 @@ const Signup = (props) => {
         }
     }
     return (
-        <div className='container'>
+        <div className='container auth-page'>
             <h2 className='my-2 mb-4'>Create an account to start using MyTasks</h2>
-            <form onSubmit={onSubmit}>
+            <form onSubmit={onSubmit} className='auth-box'>
                 <div className="mb-3">
                     <label htmlFor="name" className="form-label">Name <span className={`mandatory-mark-${mode}`}>*</span></label>
                     <input required style={{

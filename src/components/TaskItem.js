@@ -38,57 +38,38 @@ const TaskItem = (props) => {
     const daysRemaining = calculateDaysRemaining(deadline, current_date);
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     const dateString = deadline.toLocaleDateString('en-US', options);
-    const [isCompleted, setIsCompleted] = useState(task.isCompleted)
 
-    const handleChange = () => {
-        // setIsCompleted(isCompleted === false ? true : false)
-        if (isCompleted === true) {
-            toggleComplete(false, task._id)
-            window.location.reload();
-        }
-        else {
-            toggleComplete(true, task._id);
-            window.location.reload();
-        }
-    }
-    useEffect(() => {
-        setIsCompleted(task.isCompleted)
-    }, [task.isCompleted])
 
     return (
         <div>
-            <div className={`card d-flex justify-content-center p-3 my-3 bg-${mode === 'light' ? 'light' : 'dark'} border-${isCompleted === true ? 'success' : 'dark'}`} >
-                <div className="card-body d-flex justify-content-between">
+            <div className={`card d-flex justify-content-center p-3 my-3 bg-${mode === 'light' ? 'light' : 'dark'} border-dark `} >
+                <div id="utility-div">
                     <div>
-                        <h5 className={`card-title `}>Title: {task.title}</h5>
-                        <p className="card-text">{task.description} </p>
-                        {task.deadline != null && <div> <p>Deadline: {dateString}</p>
-                            {daysRemaining > 0 ? <span> Days Remaining: <span className='text-success'> {daysRemaining} </span></span>
-                                : <span>Deadline expired: <span className='text-danger'>{daysRemaining * -1} days ago</span></span>}
-                        </div>
-                        }
+                        {dateString}
                     </div>
                     <div>
-                        <div>
-                            <i className="fa-sharp fa-solid fa-trash mx-2" onClick={() => { deleteTask(task._id); props.showAlert("Task Deleted Succesfully", "success"); }}></i>
-                            <i className="fa-solid fa-pen-to-square mx-2" onClick={() => { updateTask(task) }}></i>
-                        </div>
-                        <div>
-                            <Checkbox
-                                className={`text-${mode === 'dark' ? 'light' : 'dark'}`}
-                                checked={isCompleted}
-                                onChange={handleChange}
-                                color="success"
-                            />
-
-                            <div>
-                                status: {isCompleted ? <span className='text-success'>Completed!</span> : <span>Not Completed</span>}
-                            </div>
-                        </div>
+                        <i className="fa-sharp fa-solid fa-trash mx-2" onClick={() => { deleteTask(task._id); props.showAlert("Task Deleted Succesfully", "success"); }}></i>
+                        <i className="fa-solid fa-pen-to-square mx-2" onClick={() => { updateTask(task) }}></i>
                     </div>
                 </div>
+                <hr />
+                <div className=" d-flex justify-content-between align-items-center">
+                    <div>
+                        <h5 className={`card-title fw-semibold `}> {task.title}</h5>
+                        <p className="card-text"> <span id='description'>{task.description} </span> </p>
+                        {
+                            task.deadline != null &&
+                            <div id='deadline'>
+                                {/* <p>Deadline: {dateString}</p> */}
+                                {daysRemaining > 0 ? <span> Days Remaining: <span className='text-success'> {daysRemaining} </span></span>
+                                    : <span>Deadline expired: <span className='text-danger'>{daysRemaining * -1} days ago</span></span>}
+                            </div>
+                        }
+                    </div>
+
+                </div>
             </div>
-        </div>
+        </div >
     )
 }
 

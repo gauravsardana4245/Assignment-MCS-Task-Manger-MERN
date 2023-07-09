@@ -38,9 +38,9 @@ const Login = (props) => {
         }
     }
     return (
-        <div className='container'>
+        <div className='container auth-page'>
             <h2 className='my-2'>Login to continue to MyTasks</h2>
-            <form onSubmit={onSubmit}>
+            <form onSubmit={onSubmit} className='auth-box'>
 
                 <div className="mb-3">
                     <label htmlFor="exampleInputEmail1" className="form-label">Email address </label>

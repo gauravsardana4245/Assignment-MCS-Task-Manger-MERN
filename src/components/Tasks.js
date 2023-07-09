@@ -49,12 +49,11 @@ const Tasks = (props) => {
     const ref2 = useRef(null);
     const updateTask = (currentTask) => {
         ref.current.click();
-        setTask({ id: currentTask._id, etitle: currentTask.title, edescription: currentTask.description, etag: currentTask.tag })
+        setTask({ id: currentTask._id, etitle: currentTask.title, edescription: currentTask.description, etag: currentTask.tag, edeadline: currentTask.deadline })
     }
 
     const changeHandler = (e) => {
-        setTask({ ...task, [e.target.name]: e.target.value })
-
+        setTask({ ...task, [e.target.name]: e.target.value });
     }
 
     const submitHandler = (e) => {
@@ -77,7 +76,7 @@ const Tasks = (props) => {
                 <div className="modal-dialog" role="document">
                     <div className={`modal-content bg-${mode === 'light' ? 'light' : 'dark'}`}>
                         <div className="modal-header">
-                            <h5 className="modal-title" id="exampleModalLabel">Edit Todo</h5>
+                            <h5 className="modal-title" id="exampleModalLabel">Edit Task</h5>
                             <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                                 <span style={{ color: `${mode === 'light' ? "black" : 'white'}` }} aria-hidden="true">&times;</span>
                             </button>
@@ -127,13 +126,14 @@ const Tasks = (props) => {
                         <div className="modal-footer">
 
                             <button type="button" ref={ref2} className="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" disabled={task.edescription.length < 5 || task.etitle.length < 3} onClick={submitHandler} className="btn btn-primary">Save changes</button>
+                            <button type="button" disabled={task.edescription.length < 5 || task.etitle.length < 3} onClick={submitHandler} className="btn btn-dark">Save changes</button>
                         </div>
                     </div>
                 </div>
             </div>
             <div className='my-5  container tasks-container'>
                 <h2 className='text-center'>Your Tasks</h2>
+                <hr />
                 {tasks.length === 0 ? <div className='container'> No tasks to display</div>
                     :
                     tasks.map((currenttask) => {
