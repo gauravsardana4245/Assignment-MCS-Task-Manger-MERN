@@ -10,6 +10,7 @@ const Tasks = (props) => {
     const dispatch = useDispatch();
     const { getTasks, editTask } = bindActionCreators(actionCreators, dispatch)
     const { showAlert, mode, setName } = props;
+
     let navigate = useNavigate();
     const [tasks, setTasks] = useState([]);
     const tasks_from_redux = useSelector(state => state.task.tasks)
@@ -49,7 +50,20 @@ const Tasks = (props) => {
     const ref2 = useRef(null);
     const updateTask = (currentTask) => {
         ref.current.click();
-        setTask({ id: currentTask._id, etitle: currentTask.title, edescription: currentTask.description, etag: currentTask.tag, edeadline: currentTask.deadline })
+        let formattedDeadline = "";
+        if (currentTask.deadline != null) {
+            const deadline = new Date(currentTask.deadline);
+
+            const yyyy = deadline.getFullYear();
+            let mm = deadline.getMonth() + 1; // Months start at 0!
+            let dd = deadline.getDate();
+
+            if (dd < 10) dd = '0' + dd;
+            if (mm < 10) mm = '0' + mm;
+
+            formattedDeadline = yyyy + '-' + mm + '-' + dd;
+        }
+        setTask({ id: currentTask._id, etitle: currentTask.title, edescription: currentTask.description, etag: currentTask.tag, edeadline: formattedDeadline })
     }
 
     const changeHandler = (e) => {

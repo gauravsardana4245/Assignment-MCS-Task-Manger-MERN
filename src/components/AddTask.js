@@ -65,7 +65,7 @@ const AddTask = (props) => {
                         }} className="form-control" id="tag" name="tag" value={task.tag} onChange={changeHandler} />
                     </div>
                     <div className="mb-3">
-                        <label htmlFor="deadline" className="form-label">Deadline</label>
+                        <label htmlFor="deadline" className="form-label">Deadline (Optional)</label>
                         <input onBlur={changeHandler} type="date" style={{
                             backgroundColor: `${mode === 'dark' ? "#212529" : 'white'}`,
                             color: `${mode === 'light' ? "black" : 'white'}`
@@ -73,7 +73,7 @@ const AddTask = (props) => {
                     </div>
 
                     <div className='d-flex justify-content-center'>
-                        <button disabled={task.description.length < 5 || task.title.length < 3} type="submit" className="btn btn-dark" onClick={submitHandler}>Add Task</button>
+                        <button type="submit" disabled={task.description.length < 5 || task.title.length < 3} className="btn btn-dark" onClick={submitHandler}>Add Task</button>
                     </div>
                 </form >
             </div >

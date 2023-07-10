@@ -1,8 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators } from '../state/index';
-import Checkbox from '@mui/material/Checkbox';
-import { useEffect, useState } from 'react';
 
 const TaskItem = (props) => {
     const calculateDaysRemaining = (deadline, currentDate) => {
@@ -31,13 +29,30 @@ const TaskItem = (props) => {
     }
 
     const dispatch = useDispatch();
-    const { deleteTask, toggleComplete } = bindActionCreators(actionCreators, dispatch)
+    const { deleteTask } = bindActionCreators(actionCreators, dispatch)
     const { task, updateTask, mode } = props;
-    const deadline = new Date(task.deadline);
+    let deadline = null;
+
+    let formattedDeadline = "";
+    if (task.deadline != null) {
+
+        deadline = new Date(task.deadline);
+
+        const yyyy = deadline.getFullYear();
+        let mm = deadline.getMonth() + 1; // Months start at 0!
+        let dd = deadline.getDate();
+
+        if (dd < 10) dd = '0' + dd;
+        if (mm < 10) mm = '0' + mm;
+
+        formattedDeadline = dd + '/' + mm + '/' + yyyy;
+    }
+
     const current_date = new Date();
+    const creation_date = new Date(task.date);
     const daysRemaining = calculateDaysRemaining(deadline, current_date);
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    const dateString = deadline.toLocaleDateString('en-US', options);
+    const dateString = creation_date.toLocaleDateString('en-US', options);
 
 
     return (
@@ -62,7 +77,7 @@ const TaskItem = (props) => {
                             <div id='deadline'>
                                 {/* <p>Deadline: {dateString}</p> */}
                                 {daysRemaining > 0 ? <span> Days Remaining: <span className='text-success'> {daysRemaining} </span></span>
-                                    : <span>Deadline expired: <span className='text-danger'>{daysRemaining * -1} days ago</span></span>}
+                                    : <span>Deadline expired: <span className='text-danger'>{daysRemaining * -1} days ago </span> <span id='deadlinedate'>({`${formattedDeadline}`}) </span></span>}
                             </div>
                         }
                     </div>
